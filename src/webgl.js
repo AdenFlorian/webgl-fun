@@ -54,6 +54,32 @@ export function initBuffers(gl) {
  * @param {HTMLCanvasElement} canvasElement
  */
 export function drawScene(gl, programInfo, buffers, canvasElement) {
+  gl.uniform1f(
+    programInfo.uniformLocations.time,
+    current())
+
+  {
+    const offset = 0
+    const vertexCount = 4
+    gl.drawArrays(gl.TRIANGLE_STRIP, offset, vertexCount)
+  }
+}
+
+/**
+ * @param {WebGL2RenderingContext} gl
+ * @param {{
+ *  attribLocations: { vertexPosition: any; };
+ *  program: any;
+ *  uniformLocations: {
+ *    projectionMatrix: WebGLUniformLocation | null;
+ *    modelViewMatrix: WebGLUniformLocation | null;
+ *    time: WebGLUniformLocation | null;
+ *  };
+ * }} programInfo
+ * @param {{ position: any; }} buffers
+ * @param {HTMLCanvasElement} canvasElement
+ */
+export function initScene(gl, programInfo, buffers, canvasElement) {
   gl.clearColor(...getColorForTime(Date.now() / 1000, 16))
   // gl.clearColor(0.0, 0.0, 0.0, 1.0);  // Clear to black, fully opaque
   gl.clearDepth(1.0)                 // Clear everything
@@ -130,15 +156,6 @@ export function drawScene(gl, programInfo, buffers, canvasElement) {
     programInfo.uniformLocations.modelViewMatrix,
     false,
     modelViewMatrix)
-  gl.uniform1f(
-    programInfo.uniformLocations.time,
-    current())
-
-  {
-    const offset = 0
-    const vertexCount = 4
-    gl.drawArrays(gl.TRIANGLE_STRIP, offset, vertexCount)
-  }
 }
 
 /** @param {HTMLCanvasElement} mainCanvasElement */

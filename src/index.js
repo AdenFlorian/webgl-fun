@@ -36,6 +36,8 @@ async function main() {
 
   const buffers = webgl.initBuffers(gl)
 
+  webgl.initScene(gl, programInfo, buffers, mainCanvasElement)
+
   renderLoop()
 
   function renderLoop() {
