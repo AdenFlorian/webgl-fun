@@ -14,6 +14,9 @@ async function main() {
 
   const mainCanvasElement = getMainCanvasElement()
 
+  mainCanvasElement.width = window.innerWidth
+  mainCanvasElement.height = window.innerHeight
+
   const gl = webgl.getGl(mainCanvasElement)
 
   const shaderProgram = webgl.initShaderProgram(
