@@ -39,6 +39,14 @@ export function initBuffers(gl) {
   }
 }
 
+let mousePosition = {x: 0, y: 0}
+window.addEventListener('mousemove', e => {
+  mousePosition = {
+    x: e.clientX,
+    y: e.clientY,
+  }
+})
+
 /**
  * @param {WebGL2RenderingContext} gl
  * @param {{
@@ -48,6 +56,7 @@ export function initBuffers(gl) {
  *    projectionMatrix: WebGLUniformLocation | null;
  *    modelViewMatrix: WebGLUniformLocation | null;
  *    time: WebGLUniformLocation | null;
+ *    mouse: WebGLUniformLocation | null;
  *  };
  * }} programInfo
  * @param {{ position: any; }} buffers
@@ -57,6 +66,9 @@ export function drawScene(gl, programInfo, buffers, canvasElement) {
   gl.uniform1f(
     programInfo.uniformLocations.time,
     current())
+  gl.uniform2f(
+    programInfo.uniformLocations.mouse,
+    mousePosition.x, mousePosition.y)
 
   {
     const offset = 0
@@ -74,6 +86,7 @@ export function drawScene(gl, programInfo, buffers, canvasElement) {
  *    projectionMatrix: WebGLUniformLocation | null;
  *    modelViewMatrix: WebGLUniformLocation | null;
  *    time: WebGLUniformLocation | null;
+ *    mouse: WebGLUniformLocation | null;
  *  };
  * }} programInfo
  * @param {{ position: any; }} buffers

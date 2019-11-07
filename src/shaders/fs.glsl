@@ -1,6 +1,7 @@
 precision mediump float;
 
 uniform float uTime;
+uniform vec2 uMouse;
 
 float sinNorm(in float x) {
   return (sin(x) * 0.5) + 0.5;
@@ -49,12 +50,13 @@ vec3 hsl2rgb(vec3 hsl) {
 #define rate 0.25
 
 void main() {
-  
+  float xOffset = uMouse.x / 4000.0;
+  float yOffset = uMouse.y / 4000.0;
   vec2 uv = vec2(gl_FragCoord.x / 1000.0, gl_FragCoord.y / 1000.0);
-  vec3 topLeft = hsl2rgb(vec3(sinNorm(uTime * rate), 1.0, 0.5));
-  vec3 topRight = hsl2rgb(vec3(sinNorm(uTime * rate + 1.1), 1.0, 0.5));
-  vec3 bottomLeft = hsl2rgb(vec3(sinNorm(uTime * rate + 2.33), 1.0, 0.5));
-  vec3 bottomRight = hsl2rgb(vec3(sinNorm(uTime * rate + 3.03), 1.0, 0.5));
+  vec3 topLeft = hsl2rgb(vec3(sinNorm(uTime * rate + xOffset), 1.0, 0.5));
+  vec3 topRight = hsl2rgb(vec3(sinNorm(uTime * rate + 1.1 + xOffset), 1.0, 0.5));
+  vec3 bottomLeft = hsl2rgb(vec3(sinNorm(uTime * rate + 2.33 + yOffset), 1.0, 0.5));
+  vec3 bottomRight = hsl2rgb(vec3(sinNorm(uTime * rate + 3.03 + yOffset), 1.0, 0.5));
   vec3 final = mix(
     mix(topLeft, topRight, uv.x),
     mix(bottomLeft, bottomRight, uv.x),

@@ -31,6 +31,7 @@ async function main() {
       projectionMatrix: gl.getUniformLocation(shaderProgram, 'uProjectionMatrix'),
       modelViewMatrix: gl.getUniformLocation(shaderProgram, 'uModelViewMatrix'),
       time: gl.getUniformLocation(shaderProgram, 'uTime'),
+      mouse: gl.getUniformLocation(shaderProgram, 'uMouse'),
     },
   }
 
