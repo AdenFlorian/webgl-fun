@@ -2,6 +2,7 @@
   "compilerOptions": {
     "strict": true,
     "checkJs": true,
-    "target": "esnext"
+    "target": "esnext",
+    "module": "esnext"
   }
 }
