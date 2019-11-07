@@ -1,6 +1,14 @@
 import * as mat4 from './lib/gl-matrix/mat4.js'
 import {getColorForTime} from './utils.js'
 
+const start = Date.now() / 1000
+function now() {
+  return Date.now() / 1000
+}
+function current() {
+  return now() - start
+}
+
 /** @param {WebGL2RenderingContext} gl */
 export function initBuffers(gl) {
   // Create a buffer for the square's positions.
@@ -33,7 +41,15 @@ export function initBuffers(gl) {
 
 /**
  * @param {WebGL2RenderingContext} gl
- * @param {{ attribLocations: { vertexPosition: any; }; program: any; uniformLocations: { projectionMatrix: any; modelViewMatrix: any; }; }} programInfo
+ * @param {{
+ *  attribLocations: { vertexPosition: any; };
+ *  program: any;
+ *  uniformLocations: {
+ *    projectionMatrix: WebGLUniformLocation | null;
+ *    modelViewMatrix: WebGLUniformLocation | null;
+ *    time: WebGLUniformLocation | null;
+ *  };
+ * }} programInfo
  * @param {{ position: any; }} buffers
  * @param {HTMLCanvasElement} canvasElement
  */
@@ -114,11 +130,14 @@ export function drawScene(gl, programInfo, buffers, canvasElement) {
     programInfo.uniformLocations.modelViewMatrix,
     false,
     modelViewMatrix)
+  gl.uniform1f(
+    programInfo.uniformLocations.time,
+    current())
 
   {
     const offset = 0
     const vertexCount = 4
-    gl.drawArrays(gl.TRIANGLE_FAN, offset, vertexCount)
+    gl.drawArrays(gl.TRIANGLE_STRIP, offset, vertexCount)
   }
 }
 
