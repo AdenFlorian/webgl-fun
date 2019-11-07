@@ -46,7 +46,7 @@ vec3 hsl2rgb(vec3 hsl) {
   return rgb;
 }
 
-#define rate 0.5
+#define rate 0.25
 
 void main() {
   

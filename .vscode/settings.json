@@ -2,7 +2,8 @@
   "glsl-canvas.useCompactFormatter": false,
   "cSpell.words": [
     "glmatrix",
-    "glsl"
+    "glsl",
+    "scrollbar"
   ],
   "javascript.format.semicolons": "remove",
   "typescript.format.semicolons": "remove",

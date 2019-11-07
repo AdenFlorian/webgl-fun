@@ -4,13 +4,10 @@ import * as webgl from './webgl.js'
 main()
 
 async function main() {
-  const mainHeaderId = 'mainHeader'
-  const mainHeaderElement = document.getElementById(mainHeaderId)
-  if (mainHeaderElement === null) {
-    console.error(`could not find mainHeaderElement using id: ${mainHeaderId}`)
-    return
-  }
-  mainHeaderElement.textContent += ' Goodbye!'
+  const mainHeaderElement = document.createElement('h1')
+  document.body.appendChild(mainHeaderElement)
+  mainHeaderElement.id = 'mainHeader'
+  mainHeaderElement.textContent = 'Hello, world! Goodbye!'
 
   const mainCanvasElement = getMainCanvasElement()
 
@@ -48,13 +45,8 @@ async function main() {
 }
 
 function getMainCanvasElement() {
-  const mainCanvasId = 'mainCanvas'
-  const mainCanvasElement = document.getElementById(mainCanvasId)
-  if (mainCanvasElement === null) {
-    throw new Error(`could not find mainCanvasElement using id: ${mainCanvasId}`)
-  }
-  if (!(mainCanvasElement instanceof HTMLCanvasElement)) {
-    throw new Error(`!(mainCanvasElement instanceof HTMLCanvasElement): ` + JSON.stringify({mainCanvasElement}))
-  }
-  return mainCanvasElement
+  const element = document.createElement('canvas')
+  document.body.appendChild(element)
+  element.id = 'mainCanvas'
+  return element
 }

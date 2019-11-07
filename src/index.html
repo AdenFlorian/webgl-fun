@@ -2,49 +2,11 @@
 <html>
 
 <head>
-  <link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet">
-  <style>
-    body {
-      background-color: rgb(22, 22, 22);
-      color: rgb(29, 29, 29);
-      font-family: "Questrial", sans-serif;
-      overflow-x: hidden;
-      /* Firefox */
-      scrollbar-width: none;
-      /* IE 10+ */
-      -ms-overflow-style: none;
-    }
-
-    body::-webkit-scrollbar {
-      /* WebKit */
-      width: 0;
-      height: 0;
-    }
-
-    #mainHeader {
-      font-size: 16em;
-      word-wrap: break-word;
-    }
-
-    canvas#mainCanvas {
-      position: fixed;
-      width: 100vw;
-      height: 100vh;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: -1;
-    }
-  </style>
+  <link href="/src/index.css" rel="stylesheet">
+  <script src="/src/index.js" type="module"></script>
 </head>
 
 <body>
-  <h1 id="mainHeader">Hello, world!</h1>
-
-  <canvas id="mainCanvas"></canvas>
-
-  <script type="module" src="/src/index.js"></script>
 </body>
 
 </html>
