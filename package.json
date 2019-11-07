@@ -3,5 +3,8 @@
   "version": "0.0.1",
   "main": "index.js",
   "author": "David Valachovic \"AdenFlorian\"",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^3.7.2"
+  }
 }
