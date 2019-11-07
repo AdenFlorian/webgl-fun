@@ -179,8 +179,9 @@ export function loadShader(gl, type, source) {
 
   // See if it compiled successfully
   if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    const info = gl.getShaderInfoLog(shader)
     gl.deleteShader(shader)
-    throw new Error('An error occurred compiling the shaders: ' + gl.getShaderInfoLog(shader))
+    throw new Error('An error occurred compiling the shaders: ' + info)
   }
 
   return shader
