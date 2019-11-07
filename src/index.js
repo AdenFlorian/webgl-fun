@@ -27,17 +27,19 @@ function main() {
   renderLoop()
 
   function renderLoop() {
-    gl.clearColor(...getColorForTime(Date.now() / 1000))
+    gl.clearColor(...getColorForTime(Date.now() / 1000, 16))
     draw(gl)
     requestAnimationFrame(renderLoop)
   }
 }
 
 /**
- * @param {number} timeSeconds
- * @return {[number, number, number, number]} */
-function getColorForTime(timeSeconds) {
-  const result = hslToRgb(sineNormalized(timeSeconds), 1, 0.5)
+ * @param {number} currentTimeSeconds
+ * @param {number} lengthSeconds
+ * @return {[number, number, number, number]}
+ */
+function getColorForTime(currentTimeSeconds, lengthSeconds) {
+  const result = hslToRgb(sineNormalized(currentTimeSeconds / lengthSeconds), 1, 0.5)
   return [result[0], result[1], result[2], 1.0]
 }
 
