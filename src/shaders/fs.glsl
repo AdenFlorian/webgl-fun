@@ -61,5 +61,5 @@ void main() {
     mix(topLeft, topRight, uv.x),
     mix(bottomLeft, bottomRight, uv.x),
   uv.y);
-  gl_FragColor = vec4(final, 1.0);
+  gl_FragColor = vec4(final, min(uTime, 1.0));
 }

@@ -93,8 +93,9 @@ export function drawScene(gl, programInfo, buffers, canvasElement) {
  * @param {HTMLCanvasElement} canvasElement
  */
 export function initScene(gl, programInfo, buffers, canvasElement) {
-  gl.clearColor(...getColorForTime(Date.now() / 1000, 16))
-  // gl.clearColor(0.0, 0.0, 0.0, 1.0);  // Clear to black, fully opaque
+  // gl.clearColor(...getColorForTime(Date.now() / 1000, 16))
+  gl.clearColor(0.0, 0.0, 0.0, 0.0)
+  // gl.clearColor(0.0, 0.0, 0.0, 1.0)  // Clear to black, fully opaque
   gl.clearDepth(1.0)                 // Clear everything
   gl.enable(gl.DEPTH_TEST)           // Enable depth testing
   gl.depthFunc(gl.LEQUAL)            // Near things obscure far things
@@ -173,7 +174,7 @@ export function initScene(gl, programInfo, buffers, canvasElement) {
 
 /** @param {HTMLCanvasElement} mainCanvasElement */
 export function getGl(mainCanvasElement) {
-  const gl = mainCanvasElement.getContext("webgl2")
+  const gl = mainCanvasElement.getContext("webgl2", {premultipliedAlpha: false})
 
   if (gl === null) {
     throw new Error("Unable to initialize WebGL. Your browser or machine may not support it.")
