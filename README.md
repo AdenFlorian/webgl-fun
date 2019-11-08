@@ -4,6 +4,8 @@
 
 `npm ci`
 
+`npm start`
+
 Install vscode extension "Live Server"
 
 Click "Go Live" in bottom left
