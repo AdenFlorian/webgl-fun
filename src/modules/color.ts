@@ -4,24 +4,14 @@
  * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
  * Assumes h, s, and l are contained in the set [0, 1] and
  * returns r, g, and b in the set [0, 1].
- *
- * @param   {number}  h
- * @param   {number}  s
- * @param   {number}  l
- * @return  {[number, number, number]}
  */
-export function hslToRgb(h, s, l) {
-  let r, g, b
+export function hslToRgb(h: number, s: number, l: number) {
+  let r: number, g: number, b: number
 
   if (s == 0) {
     r = g = b = l // achromatic
   } else {
-    /**
-     * @param {number} p
-     * @param {number} q
-     * @param {number} t
-     */
-    const hue2rgb = function hue2rgb(p, q, t) {
+    const hue2rgb = function hue2rgb(p: number, q: number, t: number) {
       if (t < 0) t += 1
       if (t > 1) t -= 1
       if (t < 1 / 6) return p + (q - p) * 6 * t
@@ -37,5 +27,5 @@ export function hslToRgb(h, s, l) {
     b = hue2rgb(p, q, h - 1 / 3)
   }
 
-  return [r, g, b]
+  return [r, g, b] as const
 }

@@ -1,7 +1,6 @@
 import {hslToRgb} from "./modules/color.js"
 
-/** @param {string} name */
-export async function loadShaderFromServer(name) {
+export async function loadShaderFromServer(name: string) {
   const response = await fetch('./shaders/' + name, {
     method: 'get',
   })
@@ -13,17 +12,11 @@ export async function loadShaderFromServer(name) {
   }
 }
 
-/**
- * @param {number} currentTimeSeconds
- * @param {number} lengthSeconds
- * @return {[number, number, number, number]}
- */
-export function getColorForTime(currentTimeSeconds, lengthSeconds) {
+export function getColorForTime(currentTimeSeconds: number, lengthSeconds: number) {
   const result = hslToRgb(sineNormalized(currentTimeSeconds / lengthSeconds), 1, 0.5)
-  return [result[0], result[1], result[2], 1.0]
+  return [result[0], result[1], result[2], 1.0] as const
 }
 
-/**  @param {number} x */
-export function sineNormalized(x) {
+export function sineNormalized(x: number) {
   return (Math.sin(x) * 0.5) + 0.5
 }

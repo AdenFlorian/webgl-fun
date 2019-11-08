@@ -1,4 +1,5 @@
-import * as mat4 from './lib/gl-matrix/mat4.js'
+// @ts-ignore
+import * as mat4 from '../node_modules/gl-matrix/esm/mat4.js'
 import {getColorForTime} from './utils.js'
 
 const start = Date.now() / 1000
@@ -10,7 +11,7 @@ function current() {
 }
 
 /** @param {WebGL2RenderingContext} gl */
-export function initBuffers(gl) {
+export function initBuffers(gl: WebGL2RenderingContext) {
   // Create a buffer for the square's positions.
   const positionBuffer = gl.createBuffer()
 
@@ -47,22 +48,27 @@ window.addEventListener('mousemove', e => {
   }
 })
 
-/**
- * @param {WebGL2RenderingContext} gl
- * @param {{
- *  attribLocations: { vertexPosition: any; };
- *  program: any;
- *  uniformLocations: {
- *    projectionMatrix: WebGLUniformLocation | null;
- *    modelViewMatrix: WebGLUniformLocation | null;
- *    time: WebGLUniformLocation | null;
- *    mouse: WebGLUniformLocation | null;
- *  };
- * }} programInfo
- * @param {{ position: any; }} buffers
- * @param {HTMLCanvasElement} canvasElement
- */
-export function drawScene(gl, programInfo, buffers, canvasElement) {
+export interface ProgramInfo {
+  readonly attribLocations: {vertexPosition: any}
+  readonly program: any
+  readonly uniformLocations: {
+    readonly projectionMatrix: WebGLUniformLocation | null
+    readonly modelViewMatrix: WebGLUniformLocation | null
+    readonly time: WebGLUniformLocation | null
+    readonly mouse: WebGLUniformLocation | null
+  }
+}
+
+export interface Buffers {
+  readonly position: any
+}
+
+export function drawScene(
+  gl: WebGL2RenderingContext,
+  programInfo: ProgramInfo,
+  buffers: Buffers,
+  canvasElement: HTMLCanvasElement,
+) {
   gl.uniform1f(
     programInfo.uniformLocations.time,
     current())
@@ -77,22 +83,12 @@ export function drawScene(gl, programInfo, buffers, canvasElement) {
   }
 }
 
-/**
- * @param {WebGL2RenderingContext} gl
- * @param {{
- *  attribLocations: { vertexPosition: any; };
- *  program: any;
- *  uniformLocations: {
- *    projectionMatrix: WebGLUniformLocation | null;
- *    modelViewMatrix: WebGLUniformLocation | null;
- *    time: WebGLUniformLocation | null;
- *    mouse: WebGLUniformLocation | null;
- *  };
- * }} programInfo
- * @param {{ position: any; }} buffers
- * @param {HTMLCanvasElement} canvasElement
- */
-export function initScene(gl, programInfo, buffers, canvasElement) {
+export function initScene(
+  gl: WebGL2RenderingContext,
+  programInfo: ProgramInfo,
+  buffers: Buffers,
+  canvasElement: HTMLCanvasElement,
+) {
   // gl.clearColor(...getColorForTime(Date.now() / 1000, 16))
   gl.clearColor(0.0, 0.0, 0.0, 0.0)
   // gl.clearColor(0.0, 0.0, 0.0, 1.0)  // Clear to black, fully opaque
@@ -173,7 +169,7 @@ export function initScene(gl, programInfo, buffers, canvasElement) {
 }
 
 /** @param {HTMLCanvasElement} mainCanvasElement */
-export function getGl(mainCanvasElement) {
+export function getGl(mainCanvasElement: HTMLCanvasElement) {
   const gl = mainCanvasElement.getContext("webgl2", {premultipliedAlpha: false})
 
   if (gl === null) {
@@ -183,12 +179,7 @@ export function getGl(mainCanvasElement) {
   return gl
 }
 
-/**
- * @param {WebGL2RenderingContext} gl
- * @param {string} vsSource
- * @param {string} fsSource
- */
-export function initShaderProgram(gl, vsSource, fsSource) {
+export function initShaderProgram(gl: WebGL2RenderingContext, vsSource: string, fsSource: string) {
   const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vsSource)
   const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource)
 
@@ -210,12 +201,7 @@ export function initShaderProgram(gl, vsSource, fsSource) {
   return shaderProgram
 }
 
-/**
- * @param {WebGL2RenderingContext} gl
- * @param {number} type
- * @param {string} source
- */
-export function loadShader(gl, type, source) {
+export function loadShader(gl: WebGL2RenderingContext, type: number, source: string) {
   const shader = gl.createShader(type)
   if (shader === null) {
     throw new Error('shader null sad face: ' + JSON.stringify({type, source}))

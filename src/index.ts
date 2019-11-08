@@ -7,7 +7,7 @@ async function main() {
   const mainHeaderElement = document.createElement('h1')
   document.body.appendChild(mainHeaderElement)
   mainHeaderElement.id = 'mainHeader'
-  mainHeaderElement.textContent = 'Hello, world! Goodbye!'
+  mainHeaderElement.textContent = 'Hello2, world! Goodbye!'
 
   const mainCanvasElement = getMainCanvasElement()
 
