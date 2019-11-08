@@ -2,7 +2,7 @@ import {hslToRgb} from "./modules/color.js"
 
 /** @param {string} name */
 export async function loadShaderFromServer(name) {
-  const response = await fetch('/src/shaders/' + name, {
+  const response = await fetch('./shaders/' + name, {
     method: 'get',
   })
 
