@@ -47,6 +47,12 @@ vec3 hsl2rgb(vec3 hsl) {
   return rgb;
 }
 
+/* Easing Cubic Out equation */
+/* Adapted from Robert Penner easing equations */
+float easeCubicOut(float t) {
+  return ((t = t - 1.0) * t * t + 1.0);
+}
+
 #define rate 0.25
 
 void main() {
@@ -61,5 +67,5 @@ void main() {
     mix(topLeft, topRight, uv.x),
     mix(bottomLeft, bottomRight, uv.x),
   uv.y);
-  gl_FragColor = vec4(final, min(uTime, 1.0));
+  gl_FragColor = vec4(final, min(easeCubicOut(uTime / 2.0), 1.0));
 }
